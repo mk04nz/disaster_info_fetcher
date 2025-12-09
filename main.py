@@ -59,7 +59,7 @@ if __name__ == "__main__":
     url = config.URL
     parser = argparse.ArgumentParser(description="Show earthquake information")
     parser.add_argument("--code", type=int, default=551, help="Set 551(earthquake) or 552(tsunami). (default: 551)")
-    parser.add_argument("--limit", type=int, default=1, help="Set the number of information. (default: 551)")
+    parser.add_argument("--limit", type=int, default=1, help="Set the number of information. (default: 1)")
     args = parser.parse_args()
 
     params = set_params(args.code, args.limit)
