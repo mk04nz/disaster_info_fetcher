@@ -19,7 +19,6 @@ class DisasterInfo(ABC):
     def __init__(self, data: Dict[str, Any]):
         self.raw_data = data
         self.id = data.get('id', 'Unknown ID')
-        self.time = data.get('time', 'Unknown Time')
 
     @abstractmethod
     def display(self) -> None:
