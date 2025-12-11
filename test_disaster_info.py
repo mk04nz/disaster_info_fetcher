@@ -82,6 +82,23 @@ class TestDisasterInfo(unittest.TestCase):
         mock_log_error.assert_called_once()
 
 
+    @patch('requests.get')
+    @patch('sys.exit')
+    @patch('logging.error')
+    def test_fetch_data_value_error(self, mock_log_error, mock_sys_exit, mock_get):
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.text = "Not Json Text"
+        mock_response.json.side_effect = ValueError("Not json text")
+        mock_get.return_value = mock_response
+
+        client = APIClient(self.TEST_URL)
+        data = client.fetch_data(code=551, limit=1)
+
+        mock_sys_exit.assert_called_once_with(1)
+        mock_log_error.assert_called_once()
+
+
     def test_earthquake_parsing_robustness(self):
         earthquake = Earthquake({})
 
@@ -110,6 +127,26 @@ class TestDisasterInfo(unittest.TestCase):
             "Tsunami: No tsunami triggered.\n"
         )
         self.assertEqual(mock_stdout.getvalue(), expected_output)
+
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('disaster_info.Translator')
+    @patch('logging.warning')
+    def test_earthquake_display_with_original_text(self, mock_log_warning, mock_translator, mock_stdout):
+        mock_translator.return_value.translate.return_value = Exception("Error")
+
+        earthquake = Earthquake(MOCK_EARTHQUAKE_DATA)
+        earthquake.display()
+
+        expected_output = (
+            "Earthquake ID: earthquake0123456789abcd\n"
+            "Hypocenter: 東京湾\n"
+            "Magnitude: 5.5\n"
+            "Time: 2025/12/01 11:00:00\n"
+            "Tsunami: No tsunami triggered.\n"
+        )
+        self.assertEqual(mock_stdout.getvalue(), expected_output)
+        mock_log_warning.assert_called_once()
 
 
     def test_tsunami_parsing_robustness(self):
