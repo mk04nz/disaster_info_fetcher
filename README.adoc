@@ -13,8 +13,8 @@ A Python CLI tool that fetches real-time earthquake and tsunami information from
 +
 [source, console]
 ----
-$ git clone https://github.com/mk04nz/work.git
-$ cd work
+$ git clone https://github.com/mk04nz/disaster_info_fetcher.git
+$ cd disaster_info_fetcher
 ----
 
 . Install dependencies
