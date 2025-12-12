@@ -1,0 +1,54 @@
+= Earthquake & Tsunami Information Fetcher
+
+A Python CLI tool that fetches real-time earthquake and tsunami information from the [P2PQuake API](https://www.p2pquake.net/json_api_v2/), translates Japanese location names into English, and displays them in a readable format.
+
+== Prerequisites
+
+* Python 3.11
+* Internet connection (for API and Translation)
+
+== How to install
+
+. git clone this repository
++
+[source, console]
+----
+$ git clone https://github.com/mk04nz/work.git
+$ cd work
+----
+
+. Install dependencies
++
+[source, console]
+----
+$ pip install -r requirements.txt
+----
+
+== How to use
+
+Run the script from the command line. +
+You can specify the information type and the number of records.
+
+=== Options
+
+* `--code`: Set `551` for Earthquake info (default) or `552` for Tsunami info.
+* `--limit`: Set the number of records to fetch (default: `1`).
+
+=== Examples
+
+[source, console]
+----
+$ python3 disaster_info.py --code 551 --limit 2
+-----No. 1 -----
+Earthquake ID: 693b8c1ce88ee598246be7ef
+Hypocenter: Off the eastern coast of Aomori Prefecture
+Magnitude: 4.5
+Time: 2025/12/12 12:26:00
+Tsunami: Warning
+-----No. 2 -----
+Earthquake ID: 693b8b41e88ee598246be7ee
+Hypocenter: Off the eastern coast of Aomori Prefecture
+Magnitude: 5.7
+Time: 2025/12/12 12:21:00
+Tsunami: Warning
+----
