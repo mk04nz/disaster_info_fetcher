@@ -12,6 +12,12 @@ from googletrans import Translator
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
+try:
+    GLOBAL_TRANSLATOR = Translator()
+except Exception as e:
+    logging.error(f"Failed to initialize Translator: {e}")
+    GLOBAL_TRANSLATOR = None
+
 class DisasterInfo(ABC):
     """
     Abstract base class for disaster information.
@@ -38,9 +44,11 @@ class DisasterInfo(ABC):
         if not text or text == 'Unknown Area' or text == 'Unknown Location':
             return text
 
+        if not GLOBAL_TRANSLATOR:
+            return text
+
         try:
-            translator = Translator()
-            result = translator.translate(text, src='ja', dest='en')
+            result = GLOBAL_TRANSLATOR.translate(text, src='ja', dest='en')
             return result.text
         except Exception as e:
             logging.warning(f"Translation failed for '{text}': {e}")
