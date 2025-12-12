@@ -5,7 +5,7 @@ A Python CLI tool that fetches real-time earthquake and tsunami information from
 == Features
 
 * Object-Oriented Design
-**  an Abstract Base Class to define a common interface for disaster information.
+** Utilizes an Abstract Base Class to define a common interface for disaster information.
 ** Implements Inheritance and Polymorphism to efficiently process specific earthquake and tsunami logic.
 
 * Error Handling
