@@ -130,10 +130,10 @@ class TestDisasterInfo(unittest.TestCase):
 
 
     @patch('sys.stdout', new_callable=io.StringIO)
-    @patch('disaster_info.Translator')
+    @patch('disaster_info.GLOBAL_TRANSLATOR')
     @patch('logging.warning')
     def test_earthquake_display_with_original_text(self, mock_log_warning, mock_translator, mock_stdout):
-        mock_translator.return_value.translate.return_value = Exception("Error")
+        mock_translator.translate.side_effect = Exception("Error")
 
         earthquake = Earthquake(MOCK_EARTHQUAKE_DATA)
         earthquake.display()
