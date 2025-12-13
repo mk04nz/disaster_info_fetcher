@@ -1,6 +1,6 @@
-= Earthquake & Tsunami Information Fetcher
+= Japan Earthquake & Tsunami Information Fetcher
 
-A Python CLI tool that fetches real-time earthquake and tsunami information from the link:https://www.p2pquake.net/json_api_v2/[P2PQuake API], translates Japanese location names into English, and displays them in a readable format.
+A Python CLI tool that fetches real-time Japan earthquake and tsunami information from the link:https://www.p2pquake.net/json_api_v2/[P2PQuake API], translates Japanese location names into English, and displays them in a readable format.
 
 == Features
 
